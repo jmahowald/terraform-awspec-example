@@ -10,14 +10,13 @@ RUN gem install awspec
 
 RUN apk --no-cache add bash ca-certificates openssl && update-ca-certificates
 COPY --from=baseworkstation /usr/local/bin/* /usr/local/bin/
-COPY --from=baseworkstation /etc/profile.d/* /etc/profile.d/
 
-COPY spec/ruby_path_loader.sh /etc/profile.d/
-RUN cat /etc/profile.d/ruby_path_loader.sh >> /root/.profile
 
 # For ostensible caching purposes
 COPY --from=baseworkstation /root/.terraformrc /root/.terraformrc
 COPY --from=baseworkstation /root/.terraform.d /root/.terraform.d
+COPY spec/ruby_path_loader.sh /etc/profile.d/
+RUN cat /etc/profile.d/ruby_path_loader.sh >> /root/.profile
 
 COPY spec $SOURCE_ROOT/spec
 
@@ -26,3 +25,4 @@ ONBUILD COPY spec/* $SOURCE_ROOT/spec/
 WORKDIR /workspace
 
 ENTRYPOINT ["/bin/bash", "-l"]
+#CMD ["-c", "rake spec"]
