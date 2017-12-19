@@ -21,7 +21,7 @@ RUN cat /etc/profile.d/ruby_path_loader.sh >> /root/.profile
 COPY spec $SOURCE_ROOT/spec
 
 ONBUILD COPY terraform $SOURCE_ROOT/terraform
-ONBUILD COPY spec/* $SOURCE_ROOT/spec/
+ONBUILD COPY spec $SOURCE_ROOT/spec
 WORKDIR /workspace
 
 ENTRYPOINT ["/bin/bash", "-l"]
