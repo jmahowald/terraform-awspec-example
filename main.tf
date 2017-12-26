@@ -63,3 +63,14 @@ resource "aws_subnet" "infra" {
     Environment = "${var.environment}"
   }
 }
+
+// kitchen terraform won't work without some outputs
+// but these values are useful anyways, so it's not THAT
+// hacky
+
+output "subnet_ids" {
+  value = "${aws_subnet.infra.*.id}"
+}
+output "vpc_id" {
+  value = "${aws_vpc.main.id}"
+}

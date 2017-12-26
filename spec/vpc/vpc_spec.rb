@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'awspec'
 
 
 describe subnet('infra-a') do

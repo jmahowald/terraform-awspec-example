@@ -1,0 +1,21 @@
+---
+driver:
+  name: terraform
+  variable_files:
+    - testing.tfvars
+
+provisioner:
+  name: terraform
+
+platforms:
+  - name: aws
+
+
+verifier:
+  name: awspec
+
+suites:
+- name: base
+  verifier:
+    patterns:
+    - ./**/*spec.rb
