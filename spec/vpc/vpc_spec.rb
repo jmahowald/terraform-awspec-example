@@ -10,7 +10,7 @@ end
 
 describe subnet('infra-b') do
   it { should exist }
-  its(:cidr_block) { should eq '10.10.0.128/26'}
+  its(:cidr_block) { should eq '10.10.0.128/25'}
   it { should have_tag('Environment').value('citest') }
   it { should have_tag('Tier').value('infra') }
 end
