@@ -23,10 +23,6 @@ data "aws_availability_zone" "az" {
   name  = "${data.aws_availability_zones.available.names[count.index]}"
 }
 
-variable "aws_region" {
-  default = ""
-}
-
 variable "environment" {
   description = "Which environment does this belong to"
 }
@@ -35,13 +31,9 @@ variable "vpc_name" {
     default = ""
 }
 locals {
-  region = "${var.aws_region != "" ? var.aws_region : "us-east-1" }"
   name_prefix = "${var.vpc_name != "" ? var.vpc_name : var.environment }"
 }
 
-provider "aws" {
-  region = "${local.region}"
-}
 
 resource "aws_vpc" "main" {
   cidr_block = "${cidrsubnet("10.0.0.0/8", var.region_newbits, var.region_number[data.aws_region.current.name])}"
